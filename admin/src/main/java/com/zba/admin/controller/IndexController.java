@@ -13,4 +13,9 @@ public class IndexController {
         model.addAttribute("title", "智宝安OA管理系统 - 首页");
         return "index";
     }
+
+    @RequestMapping(value = "/login")
+    public String login(){
+        return "login";
+    }
 }
