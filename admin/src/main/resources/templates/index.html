@@ -81,13 +81,11 @@
             }
         });
 
-        /*element.on('tab(tab)', function (data){
-            console.log(data)
-        });*/
-
         element.on('nav(nav)', function (data){
             console.log(data);
+            if (content(data)){
 
+            }
             element.tabAdd('tab',{
                 title: data.context.innerText,
                 content: '<iframe src="' + data.context.dataset.link + '" width="100%" height="100%" scrolling="yes" frameborder="none"></iframe>',
@@ -96,6 +94,12 @@
         });
 
     });
+
+    //检测父元素的子元素中是否包含类名为layui-nav-child,包含返回false
+    function content(data){
+        var children = data.parentNode.children;
+
+    }
 </script>
 </body>
 </html>
