@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>[[${title}]]</title>
@@ -14,39 +14,45 @@
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">menu group 1</a>
+            <ul class="layui-nav layui-nav-tree" lay-filter="nav">
+                <li class="layui-nav-item"><a href="javascript:void(0);" data-link="/welcome">控制台</a></li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:void(0);">menu group 1</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">menu 1</a></dd>
-                        <dd><a href="javascript:;">menu 2</a></dd>
-                        <dd><a href="javascript:;">menu 3</a></dd>
+                        <dd><a href="javascript:void(0);">menu 1</a></dd>
+                        <dd><a href="javascript:void(0);">menu 2</a></dd>
+                        <dd><a href="javascript:void(0);">menu 3</a></dd>
                         <dd><a href="">the links</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">menu group 2</a>
+                    <a href="javascript:void(0);">menu group 2</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">list 1</a></dd>
-                        <dd><a href="javascript:;">list 2</a></dd>
+                        <dd><a href="javascript:void(0);">list 1</a></dd>
+                        <dd><a href="javascript:void(0);">list 2</a></dd>
                         <dd><a href="">超链接</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="javascript:;">click menu item</a></li>
-                <li class="layui-nav-item"><a href="">the links</a></li>
+                <li class="layui-nav-item"><a href="javascript:void(0);">the links</a></li>
             </ul>
         </div>
     </div>
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div style="padding: 15px;">hello world</div>
+        <div class="layui-tab" lay-allowClose="true" lay-filter="tab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">控制台</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <iframe src="/welcome" frameborder="none" scrolling="no" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="layui-footer">
-        <!-- 底部固定区域 -->
-        底部固定区域
-    </div>
+    <div class="layui-footer" th:include="footer :: footer"></div>
 </div>
 <script type="text/javascript" th:src="@{/lib/layui/layui.js}"></script>
 <script>
@@ -73,6 +79,20 @@
                     ,shadeClose: true
                 });
             }
+        });
+
+        /*element.on('tab(tab)', function (data){
+            console.log(data)
+        });*/
+
+        element.on('nav(nav)', function (data){
+            console.log(data);
+
+            element.tabAdd('tab',{
+                title: data.context.innerText,
+                content: '<iframe src="' + data.context.dataset.link + '" width="100%" height="100%" scrolling="yes" frameborder="none"></iframe>',
+                id: ''
+            });
         });
 
     });

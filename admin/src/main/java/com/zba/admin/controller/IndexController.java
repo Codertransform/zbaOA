@@ -10,8 +10,13 @@ public class IndexController {
 
     @RequestMapping(value = {"","/"})
     public String index(Model model){
-        model.addAttribute("title", "智宝安OA管理系统 - 首页");
+        model.addAttribute("title", "商城管理系统 - 首页");
         return "index";
+    }
+
+    @RequestMapping(value = "/welcome")
+    public String welcome(){
+        return "welcome";
     }
 
     @RequestMapping(value = "/login")
